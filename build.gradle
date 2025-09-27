@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group = 'dev.pinter.mailsrs'
+version = '0.6-SNAPSHOT'
+description = 'An implementation of Sender Rewriting Scheme (SRS)'
+repositories {
+    mavenCentral()
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+    withSourcesJar()
+    withJavadocJar()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Emerson Pinter'
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-Xlint:deprecation"
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}

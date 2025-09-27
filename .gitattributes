@@ -1,0 +1,9 @@
+* text=auto
+*.java text
+*.xml text
+*.sh text eol=lf
+*.properties text
+*.pem binary
+*.gradle text
+grablew text eol=lf
+grablew.bat text
