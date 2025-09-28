@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'java-library'
+    id "com.vanniktech.maven.publish" version "0.34.0"
 }
 
 group = 'dev.pinter.mailsrs'
@@ -15,8 +16,6 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(8)
     }
-    withSourcesJar()
-    withJavadocJar()
 }
 
 jar {
@@ -41,4 +40,43 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// maven publish configuration
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+
+    configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
+
+    coordinates(project.group.toString(), project.name.toString(), project.version.toString())
+
+    pom {
+        name = project.name.toString()
+        description = project.description.toString()
+        inceptionYear = "2025"
+        url = "https://github.com/epinter/mail-srs/"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "epinter"
+                name = "Emerson Pinter"
+                url = "https://github.com/epinter/"
+            }
+        }
+        scm {
+            url = "https://github.com/epinter/mail-srs/"
+            connection = "scm:git:git://github.com/epinter/mail-srs.git"
+            developerConnection = "scm:git:ssh://git@github.com/epinter/mail-srs.git"
+        }
+    }
 }
