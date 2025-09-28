@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'dev.pinter.mailsrs'
-version = '0.6'
+version = '0.7-SNAPSHOT'
 description = 'An implementation of Sender Rewriting Scheme (SRS)'
 repositories {
     mavenCentral()
